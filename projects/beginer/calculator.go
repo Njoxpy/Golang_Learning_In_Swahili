@@ -1,55 +1,75 @@
 package main
 
-import "fmt"
-
-func addition(number1 int, number2 int) int {
-	result := number1 + number2
-	return result
-}
-
-func subtraction(number1 int, number2 int) int {
-	result := number1 - number2
-	return result
-}
-
-func multiplication(number1 int, number2 int) int {
-	result := number1 * number2
-	return result
-}
-
-func division(number1 int, number2 int) int {
-	if number2 != 0 {
-		result := number1 + number2
-		return result
-	}
-	return 1
-}
+import (
+	"fmt"
+)
 
 func main() {
-	var choice int = 1
+	var number1, number2 int
+	var operation int
 
-	fmt.Println("Karibu katika Calculator kwa kutumia Lugha ya Go!")
+	// Function definitions
+	add := func(a, b int) int {
+		return a + b
+	}
 
-	fmt.Print("Zifuatazo ni operation ambazo zipo katika progam hii, Chagua namba yake!\n")
-	fmt.Print(("\t1. Addition\n \t2. Subtraction\n \t3. Multiplication\n \t4. Division\n"))
+	subtract := func(a, b int) int {
+		return a - b
+	}
 
-	fmt.Printf("Jaza chaguo lako la operesheni(1-4): ")
-	fmt.Scanf("%d", choice)
+	multiply := func(a, b int) int {
+		return a * b
+	}
 
-	switch choice {
+	divide := func(a, b int) int {
+		return a / b
+	}
+
+	fmt.Println("Enter first number:")
+	_, err := fmt.Scanln(&number1)
+	if err != nil {
+		fmt.Println("Error reading input:", err)
+		return
+	}
+
+	fmt.Println("Enter second number:")
+	_, err = fmt.Scanln(&number2)
+	if err != nil {
+		fmt.Println("Error reading input:", err)
+		return
+	}
+
+	fmt.Println("Choose operation:")
+	fmt.Println("1. Addition")
+	fmt.Println("2. Subtraction")
+	fmt.Println("3. Multiplication")
+	fmt.Println("4. Division")
+
+	_, err = fmt.Scanln(&operation)
+	if err != nil {
+		fmt.Println("Error reading input:", err)
+		return
+	}
+
+	var result int
+	switch operation {
 	case 1:
-		jibu := addition(2, 3)
-		fmt.Printf("Jibu ni %d", jibu)
+		result = add(number1, number2)
+		fmt.Printf("Result: %d\n", result)
 	case 2:
-		jibu := subtraction(2, 3)
-		fmt.Printf("Jibu ni %d", jibu)
+		result = subtract(number1, number2)
+		fmt.Printf("Result: %d\n", result)
 	case 3:
-		jibu := multiplication(2, 3)
-		fmt.Printf("Jibu ni %d", jibu)
+		result = multiply(number1, number2)
+		fmt.Printf("Result: %d\n", result)
 	case 4:
-		jibu := division(2, 3)
-		fmt.Printf("Jibu ni %d", jibu)
+		if number2 == 0 {
+			fmt.Println("Cannot divide by zero")
+			return
+		}
+		result = divide(number1, number2)
+		fmt.Printf("Result: %d\n", result)
 	default:
-		fmt.Println("Chaguo sio sahihi")
+		fmt.Println("Invalid operation")
 	}
 }
