@@ -26,12 +26,5 @@ Tuko hapa kukusaidia katika safari yako ya kujifunza Golang. Jiunge nasi kwa aji
 
 ## Mawasiliano
 
-import (
- "fmt"
-)
+Mwongozo huu umetayarishwa na **NjoxPy**. Kama una maswali au maoni, tafadhali wasiliana nami kwa [Barua pepe](godblessnyagawa@gmail.com).
 
-func main() {
- fmt.Println("Sema Dunia")
-}
-
-```

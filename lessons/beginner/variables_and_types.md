@@ -8,6 +8,7 @@
 - [Data Types](#data-types)
 - [Type Inference](#type-inference)
 - [Type Conversion](#type-conversion)
+- [Taking User Input](#taking-user-input)
 - [Mistakes](#mistakes)
 - [Best Practices](#best-practices)
 
@@ -29,10 +30,10 @@ package main
 import "fmt"
 
 func main() {
-	var miaka int = 20
-	var miaka string = "Ishirini"
+ var miaka int = 20
+ var miaka string = "Ishirini"
 
-	fmt.Println(miaka)
+ fmt.Println(miaka)
 //     # command-line-arguments
 // .\main.go:7:6: miaka redeclared in this block
 //         .\main.go:6:6: other declaration of miaka
@@ -49,7 +50,6 @@ miaka = "Ishirini"
 print(miaka) // "Ishirini
 ```
 
-
 ## Variable Declaration and Initialization
 
 - Kufanya declaration ya variable katika Go utaanza na `var` keyword ikifuatiwa na jina la variable yako na kisha `type` aina ya data.
@@ -60,7 +60,7 @@ Mfano-1
 var jina string
 ```
 
-- Variables zinakuwa declared kwa kutumia `var` keyword ikifuatiwa na jina la variable na aina(type). 
+- Variables zinakuwa declared kwa kutumia `var` keyword ikifuatiwa na jina la variable na aina(type).
 
 Mfano-2
 
@@ -90,13 +90,13 @@ package main
 import "fmt"
 
 func main() {
-	jina := "Neicore"
-	kozi := "Computer Science"
-	miaka := 20
+ jina := "Neicore"
+ kozi := "Computer Science"
+ miaka := 20
 
-	fmt.Println("Jina:", jina)
-	fmt.Println("Miaka:", miaka)
-	fmt.Println("Kozi:", kozi)
+ fmt.Println("Jina:", jina)
+ fmt.Println("Miaka:", miaka)
+ fmt.Println("Kozi:", kozi)
 }
 
 ```
@@ -129,7 +129,7 @@ func main() {
 
 ## Scope
 
-Scope au naweza nikasema wigo ni eno la code ambapo variable, constant au function inaweza kuwa accesed. Ina determine wapi katika program yako unaweza ukarefer identifier fulani unaweza ukaita identifier yako. Katika go, variables zina block scope, maana kwamba unaweza ukapata access ya variable katika block ile tu ambapo variable yako imekuwa declared. Mfano:
+Scope au naweza nikasema wigo ni eno la msimbo(code) ambapo variable, constant au function inaweza kuwa accesed. Ina determine wapi katika program yako unaweza ukarefer identifier fulani unaweza ukaita identifier yako. Katika go, variables zina block scope, maana kwamba unaweza ukapata access ya variable katika block ile tu ambapo variable yako imekuwa declared. Mfano:
 
 ```go
 package main
@@ -154,7 +154,7 @@ Variable zinazokuwa declared katika package level(nje ya main function) zinakuwa
 
 ## Naming Conventions
 
-Katika Go,naming conventions ni muhimu ili uweze kuandika code ambazo zipo clean: Hapo chini ni mfano wa naming conventions ambazo zipo common
+Katika Go,naming conventions ni muhimu ili uweze kuandika msimbo(code) ambazo zipo clean: Hapo chini ni mfano wa naming conventions ambazo zipo common
 
 - **Tumia camelCase:** Go inatumia camelCase kwa ajili ya kufanya naming ya variables, functions, na package levels identifiers. Hii ina maana kwamba inaanza na herufi ndogo(lowercase letter) na kutumia mixed case kuweza kutofautisha maneno, mfano `myVariableName`, `calculateScore`, `packageName`.
 
@@ -162,7 +162,7 @@ Katika Go,naming conventions ni muhimu ili uweze kuandika code ambazo zipo clean
 
 Aina za data katika Go zipo za aina nne Tu Ambazo ni: integer, float, string na booleans.
 
- *1. Integers*: 
+ *1. Integers*:
  Integers ziantumika kuhifadhi namba njima katika Go. `int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64`.Kwenye upande integers kuna signed integers na unsigned integers.
 
  Signed integers zinawakilisha integers ambazo ni hasi(negative) na chanya(positive), Mfano:
@@ -234,7 +234,8 @@ func main() {
 }
 
  ```
- *3. Strings*: `string` 
+
+ *3. Strings*: `string`
  Katika Go, mifuatano ni mifuatano ya baiti zinazowakilisha maandishi yanayoweza kusomeka na binadamu. Strings katika Go hazibadiliki, kumaanisha mara zinapoundwa, maudhui yake hayawezi kubadilishwa. Haya hapa ni maelezo ya mifuatano katika Go na mifano
 
  ```go
@@ -257,6 +258,7 @@ func main() {
 }
 
  ```
+
  *4. Booleans*: `bool`
 
  Value za bulliani katika Go zinawakilisha truth values na zina value mbili tu ambazo zi kweli au sikweli(true au false)
@@ -318,6 +320,38 @@ var y float64 = float64(x)
 
 Hapa tunfanya conversion ya integer x kwenda float64 na kufanya assigning kwa y.
 
+## Taking User Input
+
+- Hii mada itaangazia je kwa namna gani tunaweza tkachukua user input,kwa mfano tunaweza tukawa na program ambayo itamuwezesha mtumiaji wetu kwamba akiingiza miaka yake kisha tunaangalia kama anaruhusiwa kupiga kura au haruhusiwi basi kwenye program yetu tutaumia user input ili kjuweza kupata miaka yake na kuangalia kama atakidhi vigezo au hapana.
+
+- Kwa mwanzoni hususani kwa beginner itakuwa ngumu kidogo, ila jinsi unavyofanya mazoezi utafahamu vizuri zaidi,zipo njia 2 za kuweza kupata user input ila hapa tutatumia njia moja tu,kuna modules ambazo zitatumika ili wewe uweze kupata user input, kama zifuatazo `fmt` `bufio` `os` na `strconv`.
+
+```go
+package main
+
+import (
+ "bufio"
+ "fmt"
+ "os"
+ // "strconv"
+)
+
+func main() {
+ fmt.Println("Working with user input")
+ scanner := bufio.NewScanner(os.Stdin) // kutoka kwenye buffer io module tengeneza new scanner object ambayo ipo ndani  operating system(os package) kwenye standardinput(command line)
+ scanner.Scan() // hapa itascan line pia itahifadhi ndani ya scanner object kwamba text iliyoingizwa na mtumiaji ni ipi(text iliyokuwa scanned ni ipi)
+ input := scanner.Text() // baada ya kuwa scanned tutahifadhi line iliyokuwa scanned ndani ya input variable katika program yetu
+ fmt.Printf("Umeandika %q", input) 
+}
+
+```
+
+- Tulisema tunatengeneza program ambayo itaangalia kama mtumijai wetu miaka yake ni zaidi ya 18 au ni chini ya 18, tutajifunza [hapa](/lessons/beginner/control_flow.md) kwenye control flow,ila kwa sasa tutengeneze program ndogo ambayo mtumiaji wetu ataingiza mwaka ambao amezaliwa kisha tutamwambia miaka yake!
+
+```go
+
+```
+
 ## Mistakes
 
 - Yafuatayo ni baadhi ya makosa ambayo watu wanafanya wakati wanajifunza Golang kwenye upande wa variables na data types.
@@ -330,12 +364,12 @@ package main
 import "fmt"
 
 func main() {
-	jina := "Neicore"
-	kozi := "Computer Science"
-	miaka := 20
+ jina := "Neicore"
+ kozi := "Computer Science"
+ miaka := 20
 
-	fmt.Println("Jina:", jina)
-	fmt.Println("Miaka:", miaka)
+ fmt.Println("Jina:", jina)
+ fmt.Println("Miaka:", miaka)
     // output: # command-line-arguments
 // .\main.go:7:2: kozi declared and not used
 
@@ -354,13 +388,13 @@ package main
 import "fmt"
 
 func main() {
-	j := "Neicore"
-	k := "Computer Science"
-	x := 20
+ j := "Neicore"
+ k := "Computer Science"
+ x := 20
 
-	fmt.Println("J:", j)
-	fmt.Println("K:", k)
-	fmt.Println("X:", x)
+ fmt.Println("J:", j)
+ fmt.Println("K:", k)
+ fmt.Println("X:", x)
 }
 ```
 
