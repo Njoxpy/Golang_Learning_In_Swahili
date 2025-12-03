@@ -17,6 +17,7 @@ This repository contains structured lessons, exercises, and resources to help yo
 
 The folder structure is organized as follows:
 
+```SH
 Golang_Learning_In_Swahili
 │ README.md
 │ CONTRIBUTORS.md
@@ -42,7 +43,7 @@ Golang_Learning_In_Swahili
 │
 └───advanced
 │ ...
-
+```
 
 ## Contributing
 
